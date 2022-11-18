@@ -9,5 +9,6 @@ public interface UserService {
 	public Object getRefreshToken(String userid) throws Exception;
 	public void deleRefreshToken(String userid) throws Exception;
 	public User userInfo(String userid) throws Exception; 
-	
+	public boolean modify(User user) throws Exception; 
+	public boolean delete(String userid) throws Exception; 
 }

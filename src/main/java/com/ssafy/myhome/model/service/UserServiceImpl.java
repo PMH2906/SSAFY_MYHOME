@@ -54,6 +54,17 @@ public class UserServiceImpl implements UserService{
 	public User userInfo(String userid) throws Exception {
 		return userMapper.userInfo(userid);
 	}
+
+	@Override
+	public boolean modify(User user) throws Exception {
+		return userMapper.modify(user)==1;
+	}
+
+	@Override
+	public boolean delete(String userid) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.delete(userid)==1;
+	}
 	
 
 }

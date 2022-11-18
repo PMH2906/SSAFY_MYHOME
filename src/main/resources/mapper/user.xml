@@ -46,30 +46,30 @@
 		select userName, userId, email, phone from user where userId=#{userid}
 	</select>
 	
-	<!-- <update id="updateUser" parameterType="user">
+	<update id="modify" parameterType="user">
 		update user
 		<set>
-			<if test="#{userPass}!=null">
+			<if test="userPass!=null">
 				userPass=#{userPass},
 			</if>
-			<if test="#{userName}!=null">
+			<if test="userName!=null">
 				userName=#{userName},
 			</if>
-			<if test="#{email}!=null">
+			<if test="email!=null">
 				email=#{email},
 			</if>
-			<if test="#{phone}!=null">
+			<if test="phone!=null">
 				phone=#{phone}
 			</if>
 		</set>
 		where userId=#{userId}
 	</update>
 
-	<delete id="deleteUser" parameterType="user">
+	<delete id="delete" parameterType="string">
 		delete from user where
-		userId=#{userId}
+		userId=#{userid}
 	</delete>
-
+<!--  
 	<insert id="addArea" parameterType="map">
 		insert into interestarea (userId, dongCode) values(#{userId}, #{dong})
 	</insert>
