@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.myhome.model.mapper.UserMapper">
+
+	<resultMap type="user" id="baseUserMap">
+		<id column="userId" property="userId" />
+		<result column="userPass" property="userPass" />
+		<result column="userName" property="userName" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+	</resultMap>
+
+<!-- 	<resultMap type="dongcode" id="baseDongCodeMap">
+		<id column="dongCode" property="dongCode" />
+		<result column="sidoName" property="sidoName" />
+		<result column="gugunName" property="gugunName" />
+		<result column="dongName" property="dongName" />
+	</resultMap>
+ -->
+	<select id="login" parameterType="user" resultMap="baseUserMap">
+		select * from
+		user
+		where userId=#{userId} and userPass=#{userPass}
+	</select>
+
+	<insert id="signUp" parameterType="user">
+		insert into user (userId, userPass, userName, email, phone)
+		values (#{userId}, #{userPass}, #{userName}, #{email}, #{phone})
+	</insert>
+	
+	<select id="getRefreshToken" parameterType="string" resultType="string">
+		select token from user where userId = #{userid}
+	</select>
+	
+	<update id="saveRefreshToken" parameterType="map">
+		update user set token = #{token} where userId = #{userid} 
+	</update>
+	<update id="deleteRefreshToken" parameterType="map">
+		update user set token=#{token, jdbcType=VARCHAR} where userId = #{userid}
+	</update>
+	
+	<select id="userInfo" parameterType="string" resultMap="baseUserMap">
+		select userName, userId, email, phone from user where userId=#{userid}
+	</select>
+	
+	<!-- <update id="updateUser" parameterType="user">
+		update user
+		<set>
+			<if test="#{userPass}!=null">
+				userPass=#{userPass},
+			</if>
+			<if test="#{userName}!=null">
+				userName=#{userName},
+			</if>
+			<if test="#{email}!=null">
+				email=#{email},
+			</if>
+			<if test="#{phone}!=null">
+				phone=#{phone}
+			</if>
+		</set>
+		where userId=#{userId}
+	</update>
+
+	<delete id="deleteUser" parameterType="user">
+		delete from user where
+		userId=#{userId}
+	</delete>
+
+	<insert id="addArea" parameterType="map">
+		insert into interestarea (userId, dongCode) values(#{userId}, #{dong})
+	</insert>
+
+	<select id="interestArea" parameterType="string" resultType="dongcode">
+		select * 
+		from interestarea ia inner join dongcode dc on ia.dongCode = dc.dongCode 
+		where ia.userId = #{id}
+	</select>
+	
+	<delete id="deleteInterestArea" parameterType="string">
+		delete from interestarea where
+		userId=#{id}
+	</delete> -->
+</mapper>
+
+
+
+
+<!-- 	public int signUp (User user)  throws Exception;
+	public User login(User memberDto) throws Exception; -->
