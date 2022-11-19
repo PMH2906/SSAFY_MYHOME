@@ -67,15 +67,6 @@
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>1.4.5</version>
 		</dependency>
-		<dependency>
-
-			<groupId>com.google.code.geocoder-java</groupId>
-
-			<artifactId>geocoder-java</artifactId>
-
-			<version>0.16</version>
-
-		</dependency>
 	</dependencies>
 
 	<build>
