@@ -43,7 +43,7 @@
 	</update>
 	
 	<select id="userInfo" parameterType="string" resultMap="baseUserMap">
-		select userName, userId, email, phone from user where userId=#{userid}
+		select userName, userId, email, phone, userPass from user where userId=#{userid}
 	</select>
 	
 	<update id="modify" parameterType="user">
@@ -85,9 +85,3 @@
 		userId=#{id}
 	</delete> -->
 </mapper>
-
-
-
-
-<!-- 	public int signUp (User user)  throws Exception;
-	public User login(User memberDto) throws Exception; -->

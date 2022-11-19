@@ -1,11 +1,15 @@
 package com.ssafy.myhome.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.ssafy.myhome.interceptor.PagingInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -32,6 +36,16 @@ public class WebConfiguration implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+	
+	@Autowired
+    PagingInterceptor pi;
+	
+	// 페이
+	@Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 경로의 깊이에 상관 없이 list라고 요청이 온다면...
+        registry.addInterceptor(pi).addPathPatterns("/**/list");
     }
 	
 }
