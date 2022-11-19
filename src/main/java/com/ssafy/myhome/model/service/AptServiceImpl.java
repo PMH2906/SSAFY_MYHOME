@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
+import com.ssafy.myhome.model.dto.BaseAddress;
 import com.ssafy.myhome.model.dto.Dongcode;
 import com.ssafy.myhome.model.dto.Housedeal;
 import com.ssafy.myhome.model.dto.Houseinfo;
@@ -45,7 +46,7 @@ public class AptServiceImpl implements AptService {
 	}
 
 	@Override
-	public List<SidoGugunDongCode> getDong(String gugunCode) throws Exception {
+	public List<BaseAddress> getDong(String gugunCode) throws Exception {
 		return aptMapper.getDong(gugunCode);
 	}
 

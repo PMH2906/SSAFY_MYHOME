@@ -13,15 +13,14 @@
 		commissionOpt, insuranceOpt, userId, bcode,
 		sido, sigungu,
 		bname,
-		buildingName, lat, lng, area,
+		buildingName,area,
 		floor, buildYear,
 		contractType,
 		startDate, endDate, jibun,tradeType) values
 		(#{deposit},
 		#{rentFee},
 		#{managementFee},#{furnitureOpt},#{livingType},#{parkingOpt},#{loanOpt},#{petOpt},#{commissionOpt},#{insuranceOpt},#{userId},#{bcode},
-		#{sido}, #{sigungu},#{bname},#{buildingName},#{lat},
-		#{lng},#{area},#{floor},#{buildYear},
+		#{sido}, #{sigungu},#{bname},#{buildingName}, #{area},#{floor},#{buildYear},
 		#{contractType},
 		#{startDate},#{endDate},
 		#{jibun},1)
@@ -35,15 +34,14 @@
 		commissionOpt, insuranceOpt, userId, bcode,
 		sido, sigungu,
 		bname,
-		buildingName, lat, lng, area,
+		buildingName, area,
 		floor, buildYear,
 		contractType,
 		jibun,tradeType) values
 		(#{deposit},
 		#{rentFee},
 		#{managementFee},#{furnitureOpt},#{livingType},#{parkingOpt},#{loanOpt},#{petOpt},#{commissionOpt},#{insuranceOpt},#{userId},#{bcode},
-		#{sido}, #{sigungu},#{bname},#{buildingName},#{lat},
-		#{lng},#{area},#{floor},#{buildYear},
+		#{sido}, #{sigungu},#{bname},#{buildingName}, #{area},#{floor},#{buildYear},
 		#{contractType},
 		#{jibun},0)
 	</insert>

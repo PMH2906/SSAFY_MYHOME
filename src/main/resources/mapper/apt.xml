@@ -36,10 +36,10 @@
 	</select>
 
 	<select id="getDong" parameterType="string"
-		resultType="sidoGugunDongCode">
-		select dongCode, dongName
-		from dongcode
-		where left(dongCode, 5) = #{gugunCode} and dongName is not null
+		resultType="baseaddress">
+		select *
+		from baseaddress
+		where left(dongCode, 5) = #{gugunCode}
 		order by
 		dongName
 	</select>

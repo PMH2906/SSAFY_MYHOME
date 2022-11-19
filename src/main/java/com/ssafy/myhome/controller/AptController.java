@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.ssafy.myhome.model.dto.BaseAddress;
 import com.ssafy.myhome.model.dto.Dongcode;
 import com.ssafy.myhome.model.dto.HouseTrade;
 import com.ssafy.myhome.model.dto.Housedeal;
@@ -44,8 +45,8 @@ public class AptController {
 	}
 	
 	@GetMapping("/dong") ///apt/dong?gugunCode=11
-	public ResponseEntity<List<SidoGugunDongCode>> dong(@RequestParam("gugunCode") String gugunCode) throws Exception {
-		return new ResponseEntity<List<SidoGugunDongCode>>(service.getDong(gugunCode), HttpStatus.OK);
+	public ResponseEntity<List<BaseAddress>> dong(@RequestParam("gugunCode") String gugunCode) throws Exception {
+		return new ResponseEntity<List<BaseAddress>>(service.getDong(gugunCode), HttpStatus.OK);
 	}
 	
 	@GetMapping("/dongsearch/{dongCode}")

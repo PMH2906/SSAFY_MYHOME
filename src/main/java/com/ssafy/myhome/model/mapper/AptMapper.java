@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.github.pagehelper.Page;
+import com.ssafy.myhome.model.dto.BaseAddress;
 import com.ssafy.myhome.model.dto.Dongcode;
 import com.ssafy.myhome.model.dto.Housedeal;
 import com.ssafy.myhome.model.dto.Houseinfo;
@@ -15,6 +16,6 @@ public interface AptMapper {
 	public List<Housedeal> houseDealSearch(String aptCode) throws SQLException;
 	public List<SidoGugunDongCode> getSido() throws SQLException;
 	public List<SidoGugunDongCode> getGugun(String sidoCode) throws SQLException;
-	public List<SidoGugunDongCode> getDong(String gugunCode) throws SQLException;
+	public List<BaseAddress> getDong(String gugunCode) throws SQLException;
 	
 }

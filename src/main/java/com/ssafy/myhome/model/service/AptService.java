@@ -3,6 +3,7 @@ package com.ssafy.myhome.model.service;
 import java.util.List;
 
 import com.github.pagehelper.Page;
+import com.ssafy.myhome.model.dto.BaseAddress;
 import com.ssafy.myhome.model.dto.Dongcode;
 import com.ssafy.myhome.model.dto.Housedeal;
 import com.ssafy.myhome.model.dto.Houseinfo;
@@ -21,6 +22,6 @@ public interface AptService {
 
 	List<SidoGugunDongCode> getGugun(String sidoCode) throws Exception;
 
-	List<SidoGugunDongCode> getDong(String gugunCode) throws Exception;
+	List<BaseAddress> getDong(String gugunCode) throws Exception;
 
 }
