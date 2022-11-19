@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.myhome.model.mapper.AptTradeMapper">
+	<insert id="registHousePeriodTrade" parameterType="houseTrade">
+		insert into
+		housetrade (deposit, rentFee,
+		managementFee, furnitureOpt, livingType,
+		parkingOpt,
+		loanOpt, petOpt,
+		commissionOpt, insuranceOpt, userId, bcode,
+		sido, sigungu,
+		bname,
+		buildingName, lat, lng, area,
+		floor, buildYear,
+		contractType,
+		startDate, endDate, jibun,tradeType) values
+		(#{deposit},
+		#{rentFee},
+		#{managementFee},#{furnitureOpt},#{livingType},#{parkingOpt},#{loanOpt},#{petOpt},#{commissionOpt},#{insuranceOpt},#{userId},#{bcode},
+		#{sido}, #{sigungu},#{bname},#{buildingName},#{lat},
+		#{lng},#{area},#{floor},#{buildYear},
+		#{contractType},
+		#{startDate},#{endDate},
+		#{jibun},1)
+	</insert>
+	<insert id="registHouseTrade" parameterType="houseTrade">
+		insert into
+		housetrade (deposit, rentFee,
+		managementFee, furnitureOpt, livingType,
+		parkingOpt,
+		loanOpt, petOpt,
+		commissionOpt, insuranceOpt, userId, bcode,
+		sido, sigungu,
+		bname,
+		buildingName, lat, lng, area,
+		floor, buildYear,
+		contractType,
+		jibun,tradeType) values
+		(#{deposit},
+		#{rentFee},
+		#{managementFee},#{furnitureOpt},#{livingType},#{parkingOpt},#{loanOpt},#{petOpt},#{commissionOpt},#{insuranceOpt},#{userId},#{bcode},
+		#{sido}, #{sigungu},#{bname},#{buildingName},#{lat},
+		#{lng},#{area},#{floor},#{buildYear},
+		#{contractType},
+		#{jibun},0)
+	</insert>
+
+	<select id="houseTradeCnt" parameterType="map"
+		resultType="int">
+		select count(*) from housetrade where bcode = #{dongCode}
+		and jibun = #{jibun}
+	</select>
+
+	<select id="houseTradeSearch" parameterType="map"
+		resultType="houseTrade">
+		select * from housetrade where bcode = #{dongCode} and
+		jibun = #{jibun}
+	</select>
+</mapper>

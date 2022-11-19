@@ -1,6 +1,7 @@
 package com.ssafy.myhome.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.ssafy.myhome.model.dto.Dongcode;
 import com.ssafy.myhome.model.dto.HouseTrade;
+import com.ssafy.myhome.model.dto.Housedeal;
 import com.ssafy.myhome.model.dto.Houseinfo;
+import com.ssafy.myhome.model.dto.SidoGugunDongCode;
 import com.ssafy.myhome.model.service.AptService;
 
 @RestController
@@ -29,7 +32,23 @@ public class AptController {
 	@Autowired
 	AptService service;
 	
-	@GetMapping("dongsearch/{dongCode}")
+	// sido 반환 
+	@GetMapping("/sido")
+	public ResponseEntity<List<SidoGugunDongCode>> sido() throws Exception {
+		return new ResponseEntity<List<SidoGugunDongCode>>(service.getSido(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/gugun") //apt/gugun?sidoCode=11
+	public ResponseEntity<List<SidoGugunDongCode>> gugun(@RequestParam("sidoCode") String sidoCode) throws Exception {
+		return new ResponseEntity<List<SidoGugunDongCode>>(service.getGugun(sidoCode), HttpStatus.OK);
+	}
+	
+	@GetMapping("/dong") ///apt/dong?gugunCode=11
+	public ResponseEntity<List<SidoGugunDongCode>> dong(@RequestParam("gugunCode") String gugunCode) throws Exception {
+		return new ResponseEntity<List<SidoGugunDongCode>>(service.getDong(gugunCode), HttpStatus.OK);
+	}
+	
+	@GetMapping("/dongsearch/{dongCode}")
 	public ResponseEntity<Dongcode> dongSearch(@PathVariable("dongCode") String dongCode) throws Exception{
 		Dongcode dong = service.dongSearch(dongCode);
 		return new ResponseEntity<Dongcode>(dong, HttpStatus.OK);
@@ -38,7 +57,7 @@ public class AptController {
 	@Value("${paging.perpage}")
 	int per;
 	
-	@GetMapping("houseInfosearch/{dongCode}")
+	@GetMapping("/houseInfosearch/{dongCode}")
 	public  ResponseEntity<Map<String,Object>> houseInfoSearch(@RequestParam(required=false) Integer page, @PathVariable String dongCode) throws Exception{
 		PageHelper.startPage(page =  page == null ? 1 : page, per);
 		Page<Houseinfo> houseInfo = service.houseInfoSearch(dongCode);
@@ -52,4 +71,9 @@ public class AptController {
 		return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 	}
 	
+	@GetMapping("/housedeal/{aptCode}")
+	public ResponseEntity<List<Housedeal>> houseDealSearch(@PathVariable("aptCode") String aptCode) throws Exception{
+		List<Housedeal> houseDeal = service.houseDealSearch(aptCode);
+		return new ResponseEntity<List<Housedeal>>(houseDeal, HttpStatus.OK);
+	}
 }

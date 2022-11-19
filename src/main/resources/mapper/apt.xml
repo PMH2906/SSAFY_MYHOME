@@ -5,11 +5,44 @@
 
 <mapper namespace="com.ssafy.myhome.model.mapper.AptMapper">
 
-	<select id="dongSearch" parameterType="string" resultType="dongcode">
+	<select id="dongSearch" parameterType="string"
+		resultType="dongcode">
 		select * from dongCode where dongCode = #{dongCode}
 	</select>
-	
-	<select id="houseInfoSearch" parameterType="string" resultType="houseinfo"> 
+
+	<select id="houseInfoSearch" parameterType="string"
+		resultType="houseinfo">
 		select * from houseinfo where dongCode = #{dongCode}
 	</select>
+
+	<select id="houseDealSearch" parameterType="string"
+		resultType="housedeal">
+		select * from housedeal where aptCode = #{aptCode} limit 3;
+	</select>
+
+	<select id="getSido" resultType="sidoGugunDongCode">
+		select left(sidoCode,2)
+		sidoCode, sidoName
+		from sidocode
+		order by sidoCode
+	</select>
+
+	<select id="getGugun" parameterType="string"
+		resultType="sidoGugunDongCode">
+		select left(gugunCode,5) gugunCode, gugunName
+		from guguncode
+		where left(gugunCode,2) = #{sidoCode}
+		order by gugunCode
+	</select>
+
+	<select id="getDong" parameterType="string"
+		resultType="sidoGugunDongCode">
+		select dongCode, dongName
+		from dongcode
+		where left(dongCode, 5) = #{gugunCode} and dongName is not null
+		order by
+		dongName
+	</select>
 </mapper>
+
+

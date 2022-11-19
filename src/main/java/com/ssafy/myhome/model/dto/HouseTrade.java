@@ -36,7 +36,8 @@ public class HouseTrade {
 	private boolean contractType;
 	private String startDate;
 	private String endDate;
-	private int tradeType;
+	private boolean tradeType;
 	private String jibun;
+	private int trading;
 	
 }
