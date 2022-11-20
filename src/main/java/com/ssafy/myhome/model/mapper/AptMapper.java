@@ -11,7 +11,7 @@ import com.ssafy.myhome.model.dto.Houseinfo;
 import com.ssafy.myhome.model.dto.SidoGugunDongCode;
 
 public interface AptMapper {
-	public Dongcode dongSearch(String dongCode) throws SQLException;;
+	public BaseAddress dongSearch(String dongCode) throws SQLException;;
 	public Page<Houseinfo> houseInfoSearch(String dongCode) throws SQLException;
 	public List<Housedeal> houseDealSearch(String aptCode) throws SQLException;
 	public List<SidoGugunDongCode> getSido() throws SQLException;

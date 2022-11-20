@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.myhome.model.mapper.InterestInfoMapper">
+	<insert id="registInterestArea" parameterType="map">
+		insert into Interestarea (dongCode, userId) values (#{dongCode}, #{userid})
+	</insert>
+    
+    
+    <insert id="registInterestTrade" parameterType="map">
+		insert into InterestTrade (tradeNo, userId) values (#{tradeNo}, #{userid})
+	</insert>
+	
+	<select id="interestAreaSearch" parameterType="string" resultType="baseAddress">
+		select * from baseaddress where dongCode in (select dongCode from Interestarea where userId = #{userid})
+	</select>
+	
+	<select id="interestTradeSearch" parameterType="string" resultType="houseTrade">
+		select * from housetrade where tradeNo in (select tradeNo from InterestTrade where userId = #{userid})
+	</select>
+	
+	<delete id="deleteInterestArea" parameterType="string">
+		delete from Interestarea where dongCode = #{dongCode}
+	</delete>
+	
+	<delete id="deleteInterestTrade" parameterType="string">
+		delete from InterestTrade where tradeNo = #{tradeNo}
+	</delete>
+</mapper>

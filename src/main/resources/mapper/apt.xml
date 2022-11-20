@@ -6,8 +6,8 @@
 <mapper namespace="com.ssafy.myhome.model.mapper.AptMapper">
 
 	<select id="dongSearch" parameterType="string"
-		resultType="dongcode">
-		select * from dongCode where dongCode = #{dongCode}
+		resultType="baseaddress">
+		select * from baseaddress where dongCode = #{dongCode}
 	</select>
 
 	<select id="houseInfoSearch" parameterType="string"

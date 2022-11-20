@@ -12,7 +12,7 @@ import com.ssafy.myhome.model.dto.SidoGugunDongCode;
 
 public interface AptService {
 
-	Dongcode dongSearch(String dongCode) throws Exception;
+	BaseAddress dongSearch(String dongCode) throws Exception;
 
 	Page<Houseinfo> houseInfoSearch(String dongCode) throws Exception;
 

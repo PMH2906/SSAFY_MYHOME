@@ -21,7 +21,7 @@ public class AptServiceImpl implements AptService {
 	AptMapper aptMapper;
 	
 	@Override
-	public Dongcode dongSearch(String dongCode) throws Exception {
+	public BaseAddress dongSearch(String dongCode) throws Exception {
 		return aptMapper.dongSearch(dongCode);
 	}
 

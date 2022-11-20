@@ -50,9 +50,9 @@ public class AptController {
 	}
 	
 	@GetMapping("/dongsearch/{dongCode}")
-	public ResponseEntity<Dongcode> dongSearch(@PathVariable("dongCode") String dongCode) throws Exception{
-		Dongcode dong = service.dongSearch(dongCode);
-		return new ResponseEntity<Dongcode>(dong, HttpStatus.OK);
+	public ResponseEntity<BaseAddress> dongSearch(@PathVariable("dongCode") String dongCode) throws Exception{
+		BaseAddress baseAddress = service.dongSearch(dongCode);
+		return new ResponseEntity<BaseAddress>(baseAddress, HttpStatus.OK);
 	}
 	
 	@Value("${paging.perpage}")
