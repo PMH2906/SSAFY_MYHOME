@@ -1,6 +1,7 @@
 package com.ssafy.myhome.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -32,10 +33,17 @@ public class WebConfiguration implements WebMvcConfigurer {
 			.maxAge(1800);
 	}
 
+	@Value("${resource.path}")
+	private String resourcePath;
+	
+	@Value("${upload.path}")
+	private String uploadPath;
+	
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler(uploadPath).addResourceLocations(resourcePath);
     }
 	
 	@Autowired

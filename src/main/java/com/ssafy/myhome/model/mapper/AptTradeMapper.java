@@ -16,4 +16,8 @@ public interface AptTradeMapper {
 
 	public Page<HouseTrade> houseTradeSearch(Map<String, Object> map) throws SQLException;
 
+	public int registerFile(HouseTrade houseTrade) throws SQLException;
+
+	public HouseTrade houseTrade(String tradeNo) throws SQLException;
+
 }

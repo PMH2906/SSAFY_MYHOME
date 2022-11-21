@@ -4,13 +4,23 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.myhome.model.mapper.AptTradeMapper">
+
+	<resultMap type="houseTrade" id="viewHouseTrade"
+		autoMapping="true">
+		<id column="tradeNo" property="tradeNo" />
+		<collection property="fileInfos" column="tradeNo"
+			javaType="list" ofType="fileInfoDto" select="fileInfoList" />
+	</resultMap>
+
 	<insert id="registHousePeriodTrade" parameterType="houseTrade">
 		insert into
 		housetrade (deposit, rentFee,
-		managementFee, furnitureOpt, livingType,
+		managementFee, furnitureOpt,
+		livingType,
 		parkingOpt,
 		loanOpt, petOpt,
-		commissionOpt, insuranceOpt, userId, bcode,
+		commissionOpt, insuranceOpt,
+		userId, bcode,
 		sido, sigungu,
 		bname,
 		buildingName,area,
@@ -20,18 +30,25 @@
 		(#{deposit},
 		#{rentFee},
 		#{managementFee},#{furnitureOpt},#{livingType},#{parkingOpt},#{loanOpt},#{petOpt},#{commissionOpt},#{insuranceOpt},#{userId},#{bcode},
-		#{sido}, #{sigungu},#{bname},#{buildingName}, #{area},#{floor},#{buildYear},
+		#{sido}, #{sigungu},#{bname},#{buildingName},
+		#{area},#{floor},#{buildYear},
 		#{contractType},
 		#{startDate},#{endDate},
 		#{jibun},1)
+		<selectKey resultType="int" keyProperty="tradeNo"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
 	</insert>
 	<insert id="registHouseTrade" parameterType="houseTrade">
 		insert into
 		housetrade (deposit, rentFee,
-		managementFee, furnitureOpt, livingType,
+		managementFee, furnitureOpt,
+		livingType,
 		parkingOpt,
 		loanOpt, petOpt,
-		commissionOpt, insuranceOpt, userId, bcode,
+		commissionOpt, insuranceOpt,
+		userId, bcode,
 		sido, sigungu,
 		bname,
 		buildingName, area,
@@ -41,20 +58,53 @@
 		(#{deposit},
 		#{rentFee},
 		#{managementFee},#{furnitureOpt},#{livingType},#{parkingOpt},#{loanOpt},#{petOpt},#{commissionOpt},#{insuranceOpt},#{userId},#{bcode},
-		#{sido}, #{sigungu},#{bname},#{buildingName}, #{area},#{floor},#{buildYear},
+		#{sido}, #{sigungu},#{bname},#{buildingName},
+		#{area},#{floor},#{buildYear},
 		#{contractType},
 		#{jibun},0)
+		<selectKey resultType="int" keyProperty="tradeNo"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
 	</insert>
 
-	<select id="houseTradeCnt" parameterType="map"
-		resultType="int">
+	<select id="houseTradeCnt" parameterType="map" resultType="int">
 		select count(*) from housetrade where bcode = #{dongCode}
-		and jibun = #{jibun}
+		and jibun =
+		#{jibun}
 	</select>
 
 	<select id="houseTradeSearch" parameterType="map"
-		resultType="houseTrade">
+		resultMap="viewHouseTrade">
 		select * from housetrade where bcode = #{dongCode} and
-		jibun = #{jibun}
+		jibun
+		= #{jibun}
 	</select>
+
+	<select id="fileInfoList" resultType="fileInfoDto">
+		select saveFolder, tradeNo
+		as tradeNo2,
+		originalFile, saveFile
+		from fileinfo
+		where tradeNo =
+		#{tradeNo}
+	</select>
+
+	<!-- 각 아파트 마다의 이미지 정보 주기 -->
+	<!-- 각 아파트 마다 중 거래 클릭 시 정보 가져오기 -->
+	<insert id="registerFile" parameterType="houseTrade">
+		insert into fileinfo (tradeNo, saveFolder, originalFile, saveFile)
+		values
+		<foreach collection="fileInfos" item="fileinfo"
+			separator=" , ">
+			(#{tradeNo}, #{fileinfo.saveFolder},
+			#{fileinfo.originalFile}, #{fileinfo.saveFile})
+		</foreach>
+	</insert>
+
+	<select id="houseTrade" parameterType="string"
+		resultMap="viewHouseTrade">
+		select * from housetrade where tradeNo = #{tradeNo}
+	</select>
+
 </mapper>

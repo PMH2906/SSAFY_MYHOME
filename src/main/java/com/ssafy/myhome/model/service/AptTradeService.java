@@ -15,5 +15,6 @@ public interface AptTradeService {
 
 	boolean registHousPeriodTrade(HouseTrade houseTrade) throws Exception;
 
+	HouseTrade houseTrade(String tradeNo) throws Exception;
 	
 }

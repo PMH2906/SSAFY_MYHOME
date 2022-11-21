@@ -1,8 +1,12 @@
 package com.ssafy.myhome.model.dto;
 
+import java.util.List;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -39,5 +43,6 @@ public class HouseTrade {
 	private boolean tradeType;
 	private String jibun;
 	private int trading;
+	private List<FileInfoDto> fileInfos;
 	
 }
