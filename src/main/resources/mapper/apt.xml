@@ -17,7 +17,11 @@
 
 	<select id="houseDealSearch" parameterType="string"
 		resultType="housedeal">
-		select * from housedeal where aptCode = #{aptCode} limit 3;
+		select no, cast(replace(hd.dealAmount,',','') as unsigned)
+		as dealAmount, dealYear, dealMonth, dealDay, area, floor,
+		cancelDealType,aptCode
+		from housedeal hd
+		where aptCode = #{aptCode} limit 10;
 	</select>
 
 	<select id="getSido" resultType="sidoGugunDongCode">
@@ -39,7 +43,8 @@
 		resultType="baseaddress">
 		select *
 		from baseaddress
-		where left(dongCode, 5) = #{gugunCode}
+		where left(dongCode, 5) =
+		#{gugunCode}
 		order by
 		dongName
 	</select>

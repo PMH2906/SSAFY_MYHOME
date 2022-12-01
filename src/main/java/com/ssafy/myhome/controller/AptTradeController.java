@@ -48,6 +48,8 @@ public class AptTradeController {
 	
 	@GetMapping("/houseTradeCnt")
 	public ResponseEntity<Integer> houseTradeCnt(@RequestParam String dongCode, @RequestParam String jibun) throws Exception{
+		System.out.print("cnt"+dongCode+"jibun"+jibun);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("dongCode", dongCode);
 		map.put("jibun", jibun);
@@ -80,12 +82,13 @@ public class AptTradeController {
 		
 		return new ResponseEntity<HouseTrade>(houseTrade,HttpStatus.OK);
 	}
-	
-	
+
 	//upfile: front에서 해당 이름으로 파일 리스트 보내주
 	@PostMapping
-	public ResponseEntity<String> registHouseTrade(@Value("${file.path.upload-images}") String filePath, @RequestPart("houseTrade") HouseTrade houseTrade, @RequestPart("upfile") MultipartFile[] files) throws Exception {
-		
+	public ResponseEntity<String> registHouseTrade(@Value("${file.path.upload-images}") String filePath, @RequestPart("houseTrade") HouseTrade houseTrade, @RequestParam("upfile") MultipartFile[] files) throws Exception {
+
+		System.out.println(houseTrade);
+		System.out.println(files);
 		if (!files[0].isEmpty()) {
 //			String realPath = servletContext.getRealPath("/upload");
 //			String realPath = servletContext.getRealPath("/resources/img");
@@ -100,6 +103,8 @@ public class AptTradeController {
 			for (MultipartFile mfile : files) {
 				FileInfoDto fileInfoDto = new FileInfoDto();
 				String originalFileName = mfile.getOriginalFilename();
+				System.out.println("전 originalFileName "+originalFileName);
+				
 				if (!originalFileName.isEmpty()) {
 					String saveFileName = UUID.randomUUID().toString()
 							+ originalFileName.substring(originalFileName.lastIndexOf('.'));
@@ -108,19 +113,20 @@ public class AptTradeController {
 					fileInfoDto.setSaveFile(saveFileName);
 					mfile.transferTo(new File(folder, saveFileName));
 				}
+				System.out.println("후  ");
 				fileInfos.add(fileInfoDto);
 			}
 			houseTrade.setFileInfos(fileInfos);
 			
 		}
 		
-		if(!houseTrade.isTradeType()) { // 일반 매물 
+		if(!houseTrade.isTradeType()) { // 일반 매물 : tradeType : 0 
 			if(service.registHouseTrade(houseTrade)) {
 				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 			}
 			return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);			
 		}else {
-			if(service.registHousPeriodTrade(houseTrade)) { // 기간 매물 
+			if(service.registHousPeriodTrade(houseTrade)) { // 기간 매물 :tradeType :1
 				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 			}
 			return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);	

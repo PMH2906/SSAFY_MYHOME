@@ -25,14 +25,14 @@
 		bname,
 		buildingName,area,
 		floor, buildYear,
-		contractType,
+		trading,
 		startDate, endDate, jibun,tradeType) values
 		(#{deposit},
 		#{rentFee},
 		#{managementFee},#{furnitureOpt},#{livingType},#{parkingOpt},#{loanOpt},#{petOpt},#{commissionOpt},#{insuranceOpt},#{userId},#{bcode},
 		#{sido}, #{sigungu},#{bname},#{buildingName},
 		#{area},#{floor},#{buildYear},
-		#{contractType},
+		0,
 		#{startDate},#{endDate},
 		#{jibun},1)
 		<selectKey resultType="int" keyProperty="tradeNo"
@@ -53,14 +53,14 @@
 		bname,
 		buildingName, area,
 		floor, buildYear,
-		contractType,
+		trading,
 		jibun,tradeType) values
 		(#{deposit},
 		#{rentFee},
 		#{managementFee},#{furnitureOpt},#{livingType},#{parkingOpt},#{loanOpt},#{petOpt},#{commissionOpt},#{insuranceOpt},#{userId},#{bcode},
 		#{sido}, #{sigungu},#{bname},#{buildingName},
 		#{area},#{floor},#{buildYear},
-		#{contractType},
+		0,
 		#{jibun},0)
 		<selectKey resultType="int" keyProperty="tradeNo"
 			order="AFTER">

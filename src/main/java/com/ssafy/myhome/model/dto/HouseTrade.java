@@ -37,7 +37,6 @@ public class HouseTrade {
 	private String area;
 	private String floor;
 	private int buildYear;
-	private boolean contractType;
 	private String startDate;
 	private String endDate;
 	private boolean tradeType;

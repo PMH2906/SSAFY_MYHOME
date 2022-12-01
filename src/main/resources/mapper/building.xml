@@ -6,6 +6,6 @@
 <mapper namespace="com.ssafy.myhome.model.mapper.BuildingMapper">
 
     <select id="getBuildingInfo" parameterType="string" resultType="BuildingInfo">
-        SELECT * FROM buildinginfo where dongCode=#{dongCode} and category in ("소매", "생활서비스", "관광/여가/오락");
+        SELECT * FROM buildinginfo where dongCode=#{dongCode} and category in ("음식", "생활서비스", "관광/여가/오락") limit 500;
     </select>
 </mapper>

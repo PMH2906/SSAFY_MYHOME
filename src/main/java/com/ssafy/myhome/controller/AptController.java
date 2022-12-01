@@ -72,6 +72,13 @@ public class AptController {
 		return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
 	}
 	
+//	@GetMapping("/houseInfosearch/{dongCode}")
+//	public  ResponseEntity<List<Houseinfo>> houseInfoSearch(@RequestParam(required=false) Integer page, @PathVariable String dongCode) throws Exception{
+//		List<Houseinfo> houseInfo = service.houseInfoSearch(dongCode);
+//		
+//		return new ResponseEntity<List<Houseinfo>>(houseInfo,HttpStatus.OK);
+//	}
+	
 	@GetMapping("/housedeal/{aptCode}")
 	public ResponseEntity<List<Housedeal>> houseDealSearch(@PathVariable("aptCode") String aptCode) throws Exception{
 		List<Housedeal> houseDeal = service.houseDealSearch(aptCode);
